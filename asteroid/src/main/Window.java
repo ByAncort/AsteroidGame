@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 import graphics.Assets;
+import states.GameState;
 
 public class Window extends JFrame implements Runnable{
 	
@@ -23,6 +24,9 @@ public class Window extends JFrame implements Runnable{
 	private double TARGETTIME = 1000000000/FPS;
 	private double delta = 0;
 	private int AVERAGEFPS = FPS;
+	
+	private GameState gameState;
+	
 	
 	public Window()
 	{
@@ -52,7 +56,7 @@ public class Window extends JFrame implements Runnable{
 	
 	
 	private void update(){
-		
+		gameState.update();
 	}
 
 	private void draw(){
@@ -72,7 +76,7 @@ public class Window extends JFrame implements Runnable{
 		
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		g.drawImage(Assets.player, 0, 0, null);
+		gameState.draw(g);
 		
 		g.drawString(""+AVERAGEFPS, 10, 20);
 		
@@ -84,6 +88,7 @@ public class Window extends JFrame implements Runnable{
 	private void init()
 	{
 		Assets.init();
+		gameState = new GameState();
 	}
 	
 	
