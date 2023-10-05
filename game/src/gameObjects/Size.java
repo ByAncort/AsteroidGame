@@ -6,7 +6,7 @@ import graphics.Assets;
 
 public enum Size {
 	
-	BIG(2, Assets.bigs), MED(2, Assets.smalls), SMALL(2, Assets.tinies), TINY(0, null);
+	BIG(2, Assets.meds), MED(2, Assets.smalls), SMALL(2, Assets.tinies), TINY(0, null);
 	
 	public int quantity;
 	

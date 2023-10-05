@@ -10,14 +10,14 @@ import javax.swing.JFrame;
 import gameObjects.Constants;
 import graphics.Assets;
 import input.KeyBoard;
-import states.GameState;
+import input.MouseInput;
+import states.LoadingState;
+import states.MenuState;
+import states.State;
 
 
 public class Window extends JFrame implements Runnable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private Canvas canvas;
@@ -32,12 +32,12 @@ public class Window extends JFrame implements Runnable{
 	private double delta = 0;
 	private int AVERAGEFPS = FPS;
 	
-	private GameState gameState;
 	private KeyBoard keyBoard;
+	private MouseInput mouseInput;
 	
 	public Window()
 	{
-		setTitle("Space Ship Game");
+		setTitle("Odyssey");
 		setSize(Constants.WIDTH, Constants.HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -46,6 +46,7 @@ public class Window extends JFrame implements Runnable{
 		
 		canvas = new Canvas();
 		keyBoard = new KeyBoard();
+		mouseInput = new MouseInput();
 		
 		canvas.setPreferredSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
 		canvas.setMaximumSize(new Dimension(Constants.WIDTH, Constants.HEIGHT));
@@ -54,6 +55,8 @@ public class Window extends JFrame implements Runnable{
 		
 		add(canvas);
 		canvas.addKeyListener(keyBoard);
+		canvas.addMouseListener(mouseInput);
+		canvas.addMouseMotionListener(mouseInput);
 		setVisible(true);
 	}
 	
@@ -66,7 +69,7 @@ public class Window extends JFrame implements Runnable{
 	
 	private void update(){
 		keyBoard.update();
-		gameState.update();
+		State.getCurrentState().update();
 	}
 
 	private void draw(){
@@ -86,7 +89,7 @@ public class Window extends JFrame implements Runnable{
 		
 		g.fillRect(0, 0, Constants.WIDTH, Constants.HEIGHT);
 		
-		gameState.draw(g);
+		State.getCurrentState().draw(g);
 		
 		g.setColor(Color.WHITE);
 		
@@ -100,8 +103,18 @@ public class Window extends JFrame implements Runnable{
 	
 	private void init()
 	{
-		Assets.init();
-		gameState = new GameState();
+		
+		Thread loadingThread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				Assets.init();
+			}
+		});
+		
+		
+		
+		State.changeState(new LoadingState(loadingThread));
 	}
 	
 	

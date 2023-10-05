@@ -22,7 +22,7 @@ public class KeyBoard implements KeyListener{
 		UP = keys[KeyEvent.VK_UP];
 		LEFT = keys[KeyEvent.VK_LEFT];
 		RIGHT = keys[KeyEvent.VK_RIGHT];
-		SHOOT = keys[KeyEvent.VK_P];
+		SHOOT = keys[KeyEvent.VK_SPACE];
 	}
 	
 	@Override
