@@ -15,7 +15,7 @@ public abstract class GameObject {
 		this.texture = texture;
 	}
 	
-	public abstract void update();
+	public abstract void update(float dt);
 	
 	public abstract void draw(Graphics g);
 

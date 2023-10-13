@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 
 import graphics.Text;
 import math.Vector2D;
-import states.GameState;
 
 public class Message {
 	private float alpha;
@@ -24,7 +23,7 @@ public class Message {
 			boolean center, Font font) {
 		this.font = font;
 		this.text = text;
-		this.position = position;
+		this.position = new Vector2D(position);
 		this.fade = fade;
 		this.color = color;
 		this.center = center;

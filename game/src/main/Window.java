@@ -12,7 +12,6 @@ import graphics.Assets;
 import input.KeyBoard;
 import input.MouseInput;
 import states.LoadingState;
-import states.MenuState;
 import states.State;
 
 
@@ -67,9 +66,9 @@ public class Window extends JFrame implements Runnable{
 	}
 	
 	
-	private void update(){
+	private void update(float dt){
 		keyBoard.update();
-		State.getCurrentState().update();
+		State.getCurrentState().update(dt);
 	}
 
 	private void draw(){
@@ -135,17 +134,16 @@ public class Window extends JFrame implements Runnable{
 			time += (now - lastTime);
 			lastTime = now;
 			
-			
-			
 			if(delta >= 1)
-			{		
-				update();
+			{	
+				update((float) (delta * TARGETTIME * 0.000001f));
 				draw();
 				delta --;
 				frames ++;
 			}
 			if(time >= 1000000000)
 			{
+
 				AVERAGEFPS = frames;
 				frames = 0;
 				time = 0;

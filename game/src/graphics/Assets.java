@@ -9,14 +9,17 @@ public class Assets {
 	
 	public static boolean loaded = false;
 	public static float count = 0;
-	public static float MAX_COUNT = 46;
+	public static float MAX_COUNT = 57;
 	
 	
 	public static BufferedImage player;
+	public static BufferedImage doubleGunPlayer;
 	
 	// effects
 	
 	public static BufferedImage speed;
+	
+	public static BufferedImage[] shieldEffect = new BufferedImage[3];
 	
 	// explosion
 	
@@ -48,16 +51,21 @@ public class Assets {
 	public static Font fontBig;
 	public static Font fontMed;
 	
-	public static Clip backgroundMusic, explosion, playerLoose, playerShoot, ufoShoot;
+	public static Clip backgroundMusic, explosion, playerLoose, playerShoot, ufoShoot, powerUp;
 	
 	// ui
 	
 	public static BufferedImage blueBtn;
 	public static BufferedImage greyBtn;
 	
+	// power ups
+	
+	public static BufferedImage orb, doubleScore, doubleGun, fastFire, shield, star;
+	
 	public static void init()
 	{
 		player = loadImage("/ships/player.png");
+		doubleGunPlayer = loadImage("/ships/player.png");
 		
 		speed = loadImage("/effects/fire08.png");
 		
@@ -74,6 +82,9 @@ public class Assets {
 		fontBig = loadFont("/fonts/futureFont.ttf", 42);
 		
 		fontMed = loadFont("/fonts/futureFont.ttf", 20);
+		
+		for(int i = 0; i < 3; i++)
+			shieldEffect[i] = loadImage("/effects/shield" + (i + 1) +".png"); 
 		
 		for(int i = 0; i < bigs.length; i++)
 			bigs[i] = loadImage("/meteors/big"+(i+1)+".png");
@@ -98,9 +109,17 @@ public class Assets {
 		playerLoose = loadSound("/sounds/playerLoose.wav");
 		playerShoot = loadSound("/sounds/playerShoot.wav");
 		ufoShoot = loadSound("/sounds/ufoShoot.wav");
+		powerUp = loadSound("/sounds/powerUp.wav");
 		
 		greyBtn = loadImage("/ui/grey_button.png");
 		blueBtn = loadImage("/ui/blue_button.png");
+		
+		orb = loadImage("/powers/orb.png");
+		doubleScore = loadImage("/powers/doubleScore.png");
+		doubleGun = loadImage("/powers/doubleGun.png");
+		fastFire = loadImage("/powers/fastFire.png");
+		star = loadImage("/powers/star.png");
+		shield = loadImage("/powers/shield.png");
 		
 		// ===========================================================
 		

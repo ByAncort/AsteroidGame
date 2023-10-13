@@ -10,7 +10,7 @@ import states.GameState;
 
 public class Meteor extends MovingObject{
 
-	private Size size;
+	private Size size;	
 	
 	public Meteor(Vector2D position, Vector2D velocity, double maxVel, BufferedImage texture, GameState gameState, Size size) {
 		super(position, velocity, maxVel, texture, gameState);
@@ -20,7 +20,29 @@ public class Meteor extends MovingObject{
 	}
 
 	@Override
-	public void update() {
+	public void update(float dt) {
+		
+		Vector2D playerPos = new Vector2D(gameState.getPlayer().getCenter());
+		
+		int distanceToPlayer = (int) playerPos.subtract(getCenter()).getMagnitude();
+		
+		if(distanceToPlayer < Constants.SHIELD_DISTANCE / 2 + width / 2) {
+			
+			if(gameState.getPlayer().isShieldOn()) {
+				Vector2D fleeForce = fleeForce();
+				velocity = velocity.add(fleeForce);
+			}
+			
+
+		}
+		
+		if(velocity.getMagnitude() >= this.maxVel) {
+			Vector2D reversedVelocity = new Vector2D(-velocity.getX(), -velocity.getY());
+			velocity = velocity.add(reversedVelocity.normalize().scale(0.01f));
+		}
+		
+		velocity = velocity.limit(Constants.METEOR_MAX_VEL);
+		
 		position = position.add(velocity);
 		
 		if(position.getX() > Constants.WIDTH)
@@ -37,9 +59,17 @@ public class Meteor extends MovingObject{
 		
 	}
 	
+	private Vector2D fleeForce() {
+		Vector2D desiredVelocity = gameState.getPlayer().getCenter().subtract(getCenter());
+		desiredVelocity = (desiredVelocity.normalize()).scale(Constants.METEOR_MAX_VEL);
+		Vector2D v = new Vector2D(velocity);
+		return v.subtract(desiredVelocity);
+	}
+	
 	@Override
 	public void Destroy(){
 		gameState.divideMeteor(this);
+		gameState.playExplosion(position);
 		gameState.addScore(Constants.METEOR_SCORE, position);
 		super.Destroy();
 	}
@@ -55,11 +85,10 @@ public class Meteor extends MovingObject{
 		at.rotate(angle, width/2, height/2);
 		
 		g2d.drawImage(texture, at, null);
+		
 	}
 
 	public Size getSize(){
 		return size;
 	}
-	
-	
 }

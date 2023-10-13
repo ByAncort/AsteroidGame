@@ -17,7 +17,7 @@ public class Laser extends MovingObject{
 	}
 
 	@Override
-	public void update() {
+	public void update(float dt) {
 		position = position.add(velocity);
 		if(position.getX() < 0 || position.getX() > Constants.WIDTH ||
 				position.getY() < 0 || position.getY() > Constants.HEIGHT){

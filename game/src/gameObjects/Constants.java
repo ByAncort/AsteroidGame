@@ -1,5 +1,7 @@
 package gameObjects;
 
+import javax.swing.filechooser.FileSystemView;
+
 public class Constants {
 	
 	// frame dimensions
@@ -23,9 +25,13 @@ public class Constants {
 	
 	// Meteor properties
 	
-	public static final double METEOR_VEL = 2.0;
+	public static final double METEOR_INIT_VEL = 2.0;
 	
 	public static final int METEOR_SCORE = 20;
+	
+	public static final double METEOR_MAX_VEL = 6.0;
+	
+	public static final int SHIELD_DISTANCE = 150;
 	
 	// Ufo properties
 	
@@ -56,6 +62,24 @@ public class Constants {
 	public static final String SCORE = "SCORE";
 	public static final String DATE = "DATE";
 	
+	public static final String SCORE_PATH = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() +
+			"\\Space_Ship_Game\\data.json"; // data.xml if you use XMLParser
 	
+	// This variables are required to use XMLParser
+	
+	public static final String PLAYER = "PLAYER";
+	public static final String PLAYERS = "PLAYERS";
+	
+	// =============================================
+	
+	public static final long POWER_UP_DURATION = 10000;
+	public static final long POWER_UP_SPAWN_TIME = 8000;
+	
+	public static final long SHIELD_TIME = 12000;
+	public static final long DOUBLE_SCORE_TIME = 10000;
+	public static final long FAST_FIRE_TIME = 14000;
+	public static final long DOUBLE_GUN_TIME = 12000;
+	
+	public static final int SCORE_STACK = 1000;
 	
 }

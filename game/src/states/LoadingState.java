@@ -25,7 +25,7 @@ public class LoadingState extends State{
 	}
 	
 	@Override
-	public void update() {
+	public void update(float dt) {
 		if(Assets.loaded) {
 			State.changeState(new MenuState());
 			try {

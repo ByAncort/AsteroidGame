@@ -12,7 +12,7 @@ public abstract class State {
 	}
 	
 	
-	public abstract void update();
+	public abstract void update(float dt);
 	public abstract void draw(Graphics g);
 	
 }
