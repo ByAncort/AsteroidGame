@@ -3,7 +3,7 @@
 
 Descripción de la aplicación
 
-la carpeta game es la del juego y esta desarrollada en eclipse ide
+*la carpeta game es la del juego y esta desarrollada en eclipse ide
 
 La aplicación es un juego de acción en el que el jugador controla una nave espacial que debe destruir lunas sin ser eliminado. El juego tiene una duración de 3 meses y fue desarrollado por un estudiante de programación de 18 años.
 
